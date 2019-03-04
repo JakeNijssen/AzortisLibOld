@@ -21,12 +21,14 @@
             <version>1.13.2-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
+
+        <!-- For CraftBukkit Abstraction -->
         <dependency>
             <groupId>com.azortis</groupId>
-            <artifactId>azortislib-api</artifactId>
+            <artifactId>azortislib-craftbukkitapi</artifactId>
             <version>0.1</version>
-            <type>jar</type>
             <scope>compile</scope>
+            <type>jar</type>
         </dependency>
     </dependencies>
 
