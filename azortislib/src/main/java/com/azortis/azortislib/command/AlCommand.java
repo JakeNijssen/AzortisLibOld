@@ -8,6 +8,7 @@ import org.bukkit.plugin.Plugin;
 
 import java.util.List;
 
+@SuppressWarnings("all")
 public class AlCommand {
 
     private String name;
