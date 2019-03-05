@@ -23,42 +23,44 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginIdentifiableCommand;
 import org.bukkit.plugin.Plugin;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 @SuppressWarnings("all")
 public class AlCommand {
 
+    //Provided via constructor
     private String name;
     private String description;
     private String usage;
     private List<String> aliases;
     private Plugin plugin;
 
+    //Provided via setter methods
     private IAlCommandExecutor executor;
     private IAlTabCompleter tabCompleter;
     private Command command;
+    private HashMap<String, AlSubCommand> subCommands;
 
-    public AlCommand(String name, String description, String usage, List<String> aliases){
-        this.command = new BukkitCommand(name, this);
-        if(description != null)this.command.setDescription(description);
-        if(usage != null)this.command.setUsage(usage);
-        if(aliases != null)this.command.setAliases(aliases);
-        this.name = name;
-        if(description != null)this.description = description;
-        if(usage != null)this.usage = usage;
-        if(aliases != null)this.aliases = aliases;
-    }
 
     public AlCommand(String name, String description, String usage, List<String> aliases, Plugin plugin){
-        this.command = new BukkitPluginCommand(name, this, plugin);
-        if(description != null)this.command.setDescription(description);
-        if(usage != null)this.command.setUsage(usage);
-        if(aliases != null)this.command.setAliases(aliases);
         this.name = name;
-        if(description != null)this.description = description;
-        if(usage != null)this.usage = usage;
-        if(aliases != null)this.aliases = aliases;
-        this.plugin = plugin;
+        if (description != null) this.description = description;
+        if (usage != null) this.usage = usage;
+        if (aliases != null) this.aliases = aliases;
+        if(plugin != null) {
+            this.command = new BukkitPluginCommand(name, this, plugin);
+            if (description != null) this.command.setDescription(description);
+            if (usage != null) this.command.setUsage(usage);
+            if (aliases != null) this.command.setAliases(aliases);
+            this.plugin = plugin;
+        }else{
+            this.command = new BukkitCommand(name, this);
+            if(description != null)this.command.setDescription(description);
+            if(usage != null)this.command.setUsage(usage);
+            if(aliases != null)this.command.setAliases(aliases);
+        }
     }
 
     private class BukkitCommand extends Command {
@@ -71,6 +73,15 @@ public class AlCommand {
 
         @Override
         public boolean execute(CommandSender commandSender, String alias, String[] args) {
+            if(parent.subCommands != null) {
+                if (parent.subCommands.containsKey(args[0])) {
+                    AlSubCommand subCommand = subCommands.get(args[0]);
+                    List<String> argsList = Arrays.asList(args);
+                    argsList.remove(args[0]);
+                    String[] subArgs = argsList.toArray(new String[0]);
+                    return subCommand.execute(commandSender, alias, subArgs);
+                }
+            }
             if(parent.executor != null) return parent.executor.onCommand(commandSender, parent, alias, args);
             //TODO Log no executor error.
             return false;
@@ -100,6 +111,15 @@ public class AlCommand {
 
         @Override
         public boolean execute(CommandSender commandSender, String alias, String[] args) {
+            if(parent.subCommands != null) {
+                if (parent.subCommands.containsKey(args[0])) {
+                    AlSubCommand subCommand = subCommands.get(args[0]);
+                    List<String> argsList = Arrays.asList(args);
+                    argsList.remove(args[0]);
+                    String[] subArgs = argsList.toArray(new String[0]);
+                    return subCommand.execute(commandSender, alias, subArgs);
+                }
+            }
             if(parent.executor != null) return parent.executor.onCommand(commandSender, parent, alias, args);
             //TODO Log no executor error.
             return false;
@@ -151,5 +171,22 @@ public class AlCommand {
 
     public void setTabCompleter(IAlTabCompleter tabCompleter) {
         this.tabCompleter = tabCompleter;
+    }
+
+    public void addSubCommand(String name, IAlSubCommandExecutor executor){
+        if(subCommands == null)subCommands = new HashMap<String, AlSubCommand>();
+        subCommands.put(name, new AlSubCommand(name, this, executor));
+    }
+
+    public void addSubCommand(AlSubCommand subCommand){
+        if(subCommands == null)subCommands = new HashMap<String, AlSubCommand>();
+        subCommands.put(subCommand.getName(), subCommand);
+    }
+
+    public void addSubCommands(AlSubCommand... subCommands){
+        if(this.subCommands == null)this.subCommands = new HashMap<String, AlSubCommand>();
+        for (AlSubCommand subCommand : subCommands) {
+            this.subCommands.put(subCommand.getName(), subCommand);
+        }
     }
 }

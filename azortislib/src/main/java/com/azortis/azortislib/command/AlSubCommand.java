@@ -19,8 +19,31 @@ package com.azortis.azortislib.command;
 
 import org.bukkit.command.CommandSender;
 
-public interface IAlCommandExecutor {
+public class AlSubCommand {
 
-    boolean onCommand(CommandSender commandSender, AlCommand command, String label, String[] args);
+    private String name;
+    private AlCommand mainCommand;
+    private IAlSubCommandExecutor executor;
 
+    public AlSubCommand(String name, AlCommand mainCommand, IAlSubCommandExecutor executor){
+        this.name = name;
+        this.mainCommand = mainCommand;
+        this.executor = executor;
+    }
+
+    public boolean execute(CommandSender commandSender, String label, String[] args){
+        return executor.onSubCommand(commandSender, this, label, args);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public AlCommand getMainCommand() {
+        return mainCommand;
+    }
+
+    public IAlSubCommandExecutor getExecutor() {
+        return executor;
+    }
 }

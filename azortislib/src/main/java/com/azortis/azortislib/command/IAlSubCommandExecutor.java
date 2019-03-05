@@ -19,8 +19,8 @@ package com.azortis.azortislib.command;
 
 import org.bukkit.command.CommandSender;
 
-public interface IAlCommandExecutor {
+public interface IAlSubCommandExecutor {
 
-    boolean onCommand(CommandSender commandSender, AlCommand command, String label, String[] args);
+    boolean onSubCommand(CommandSender commandSender, AlSubCommand subCommand, String alias, String[] args);
 
 }

@@ -28,8 +28,6 @@ public class CommandBuilder {
     private String usage;
     private List<String> aliases;
     private Plugin plugin;
-    private IAlCommandExecutor executor;
-    private IAlTabCompleter tabCompleter;
 
     public void setName(String name) {
         this.name = name;
@@ -57,24 +55,7 @@ public class CommandBuilder {
         this.plugin = plugin;
     }
 
-    public void setExecutor(IAlCommandExecutor executor) {
-        this.executor = executor;
-    }
-
-    public void setTabCompleter(IAlTabCompleter tabCompleter) {
-        this.tabCompleter = tabCompleter;
-    }
-
     public AlCommand build(){
-        if(plugin != null){
-            AlCommand command = new AlCommand(name, description, usage, aliases, plugin);
-            if(executor != null)command.setExecutor(executor);
-            if(tabCompleter != null)command.setTabCompleter(tabCompleter);
-            return command;
-        }
-        AlCommand command = new AlCommand(name, description, usage, aliases);
-        if(executor != null)command.setExecutor(executor);
-        if(tabCompleter != null)command.setTabCompleter(tabCompleter);
-        return command;
+        return new AlCommand(name, description, usage, aliases, plugin);
     }
 }
