@@ -23,6 +23,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginIdentifiableCommand;
 import org.bukkit.plugin.Plugin;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -42,13 +43,26 @@ public class AlCommand {
     private IAlTabCompleter tabCompleter;
     private Command command;
     private HashMap<String, AlSubCommand> subCommands;
+    private HashMap<String, AliasFunction> aliasFunctions;
 
 
-    public AlCommand(String name, String description, String usage, List<String> aliases, Plugin plugin){
+    public AlCommand(String name, String description, String usage, List<String> rawAliases, Plugin plugin){
         this.name = name;
         if (description != null) this.description = description;
         if (usage != null) this.usage = usage;
-        if (aliases != null) this.aliases = aliases;
+        if(rawAliases != null){
+            aliases = new ArrayList<String>();
+            for (String alias : rawAliases) {
+                if(!alias.contains("-f")){
+                    aliases.add(alias);
+                    break;
+                }
+                if(aliasFunctions == null)aliasFunctions = new HashMap<String, AliasFunction>();
+                AliasFunction aliasFunction = new AliasFunction(alias);
+                aliasFunctions.put(aliasFunction.getAlias(), aliasFunction);
+                aliases.add(aliasFunction.getAlias());
+            }
+        }
         if(plugin != null) {
             this.command = new BukkitPluginCommand(name, this, plugin);
             if (description != null) this.command.setDescription(description);
@@ -173,9 +187,11 @@ public class AlCommand {
         this.tabCompleter = tabCompleter;
     }
 
-    public void addSubCommand(String name, IAlSubCommandExecutor executor){
+    public AlSubCommand addSubCommand(String name, IAlSubCommandExecutor executor){
         if(subCommands == null)subCommands = new HashMap<String, AlSubCommand>();
-        subCommands.put(name, new AlSubCommand(name, this, executor));
+        AlSubCommand subCommand = new AlSubCommand(name, this, executor);
+        subCommands.put(name, subCommand);
+        return subCommand;
     }
 
     public void addSubCommand(AlSubCommand subCommand){
@@ -189,4 +205,26 @@ public class AlCommand {
             this.subCommands.put(subCommand.getName(), subCommand);
         }
     }
+
+    public List<AlSubCommand> getSubCommands(){
+        List<AlSubCommand> subCommands = new ArrayList<AlSubCommand>();
+        if(this.subCommands != null)subCommands.addAll(this.subCommands.values());
+        return subCommands;
+    }
+
+    public boolean isFunction(String alias){
+        return aliasFunctions.containsKey(alias);
+    }
+
+    public AliasFunction getAliasFunction(String alias){
+        if(aliasFunctions.containsKey(alias))return aliasFunctions.get(alias);
+        return null;
+    }
+
+    public List<AliasFunction> getAliasFunctions(){
+        List<AliasFunction> aliasFunctions = new ArrayList<AliasFunction>();
+        if(this.aliasFunctions != null)aliasFunctions.addAll(this.aliasFunctions.values());
+        return null;
+    }
+
 }

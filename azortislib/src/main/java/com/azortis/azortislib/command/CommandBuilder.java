@@ -20,6 +20,7 @@ package com.azortis.azortislib.command;
 import org.bukkit.plugin.Plugin;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class CommandBuilder {
@@ -44,6 +45,11 @@ public class CommandBuilder {
     public void addAliases(List<String> aliases) {
         if(this.aliases == null)this.aliases = new ArrayList<String>();
         this.aliases.addAll(aliases);
+    }
+
+    public void addAliases(String... aliases){
+        if(this.aliases == null)this.aliases = new ArrayList<String>();
+        this.aliases.addAll(Arrays.asList(aliases));
     }
 
     public void addAlias(String alias) {

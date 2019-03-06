@@ -17,17 +17,21 @@
 
 package com.azortis.azortislib.command;
 
-import org.bukkit.command.CommandMap;
+public class AliasFunction {
 
-import java.util.HashMap;
+    private String alias;
+    private String function;
 
-public class CommandManager {
-
-    private HashMap<String, AlCommand> commands = new HashMap<String, AlCommand>();
-    private CommandMap commandMap;
-
-    public CommandManager(){
-
+    public AliasFunction(String rawInput){
+        alias = rawInput.split(" ")[0];
+        function = rawInput.split("-f")[1];
     }
 
+    public String getAlias() {
+        return alias;
+    }
+
+    public String getFunction() {
+        return function;
+    }
 }
