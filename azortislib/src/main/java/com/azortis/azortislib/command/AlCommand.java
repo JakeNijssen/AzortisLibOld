@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019  Azortis
+ * Copyright (C) 2019 Azortis
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -140,7 +140,7 @@ public class AlCommand {
         }
 
         @Override
-        public List<String> tabComplete(CommandSender sender, String alias, String[] args, Location location) throws IllegalArgumentException {
+        public List<String> tabComplete(CommandSender sender, String alias, String[] args, Location location) {
             if(parent.tabCompleter != null) return parent.tabCompleter.tabComplete(sender, alias, args, location);
             return null;
         }
