@@ -20,7 +20,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <artifactId>azortislib-v1_13_R</artifactId>
+    <artifactId>azortislib-v1_13_R2</artifactId>
     <version>v1_13_R2</version>
 
     <parent>
