@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="azortislib" />
         <module name="craftbukkitapi" />
+        <module name="v1_13_R2" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

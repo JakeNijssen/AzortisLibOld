@@ -15,19 +15,23 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.azortis.azortislib;
+package com.azortis.azortislib.craftbukkit;
 
-public enum MinecraftVersion {
-    v1_13_R2("v1_13_R2");
+public class CraftManager {
 
-    private final String versionString;
+    private ICraftServer craftServer;
 
-    MinecraftVersion(String versionString){
-        this.versionString = versionString;
+    public CraftManager(String mineraftversion){
+        try{
+            String packageName = "com.azortis.azortislib.craftbukkit." + mineraftversion + ".";
+            craftServer = (ICraftServer) Class.forName(packageName + "CraftServer").getConstructor().newInstance();
+        }catch (Exception exception){ //Since there are so many exception that can be thrown we use Exception and not specifics.
+            //TODO log error trough logger
+            exception.printStackTrace();
+        }
     }
 
-    public String getVersionString(){
-        return versionString;
+    public ICraftServer getServer(){
+        return craftServer;
     }
-
 }

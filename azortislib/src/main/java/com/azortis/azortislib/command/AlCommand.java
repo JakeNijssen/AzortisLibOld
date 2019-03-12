@@ -41,7 +41,7 @@ public class AlCommand {
     //Provided via setter methods
     private IAlCommandExecutor executor;
     private IAlTabCompleter tabCompleter;
-    private Command command;
+    private Command bukkitCommand;
     private HashMap<String, AlSubCommand> subCommands;
     private HashMap<String, AliasFunction> aliasFunctions;
 
@@ -64,16 +64,16 @@ public class AlCommand {
             }
         }
         if(plugin != null) {
-            this.command = new BukkitPluginCommand(name, this, plugin);
-            if (description != null) this.command.setDescription(description);
-            if (usage != null) this.command.setUsage(usage);
-            if (aliases != null) this.command.setAliases(aliases);
+            this.bukkitCommand = new BukkitPluginCommand(name, this, plugin);
+            if (description != null) this.bukkitCommand.setDescription(description);
+            if (usage != null) this.bukkitCommand.setUsage(usage);
+            if (aliases != null) this.bukkitCommand.setAliases(aliases);
             this.plugin = plugin;
         }else{
-            this.command = new BukkitCommand(name, this);
-            if(description != null)this.command.setDescription(description);
-            if(usage != null)this.command.setUsage(usage);
-            if(aliases != null)this.command.setAliases(aliases);
+            this.bukkitCommand = new BukkitCommand(name, this);
+            if(description != null)this.bukkitCommand.setDescription(description);
+            if(usage != null)this.bukkitCommand.setUsage(usage);
+            if(aliases != null)this.bukkitCommand.setAliases(aliases);
         }
     }
 
@@ -167,8 +167,8 @@ public class AlCommand {
         return null;
     }
 
-    public Command getCommand() {
-        return command;
+    public Command getBukkitCommand() {
+        return bukkitCommand;
     }
 
     public IAlCommandExecutor getExecutor() {
