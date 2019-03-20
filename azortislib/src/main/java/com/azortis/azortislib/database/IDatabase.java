@@ -15,23 +15,13 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.azortis.azortislib.craftbukkit;
+package com.azortis.azortislib.database;
 
-public class CraftManager {
+import java.sql.Connection;
 
-    private ICraftServer craftServer;
+public interface IDatabase {
 
-    public CraftManager(String minecraftVersion){
-        try{
-            String packageName = "com.azortis.azortislib.craftbukkit." + minecraftVersion + ".";
-            craftServer = (ICraftServer) Class.forName(packageName + "CraftServer").getConstructor().newInstance();
-        }catch (Exception exception){ //Since there are so many exception that can be thrown we use Exception and not specifics.
-            //TODO log error trough logger
-            exception.printStackTrace();
-        }
-    }
 
-    public ICraftServer getServer(){
-        return craftServer;
-    }
+
+    Connection getConnection();
 }

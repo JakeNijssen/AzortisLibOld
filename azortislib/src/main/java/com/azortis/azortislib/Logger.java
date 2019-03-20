@@ -15,23 +15,26 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.azortis.azortislib.craftbukkit;
+package com.azortis.azortislib;
 
-public class CraftManager {
+import org.bukkit.Bukkit;
 
-    private ICraftServer craftServer;
+public class Logger {
+    private String prefix;
 
-    public CraftManager(String minecraftVersion){
-        try{
-            String packageName = "com.azortis.azortislib.craftbukkit." + minecraftVersion + ".";
-            craftServer = (ICraftServer) Class.forName(packageName + "CraftServer").getConstructor().newInstance();
-        }catch (Exception exception){ //Since there are so many exception that can be thrown we use Exception and not specifics.
-            //TODO log error trough logger
-            exception.printStackTrace();
-        }
+    public Logger(String prefix){
+        this.prefix = prefix;
     }
 
-    public ICraftServer getServer(){
-        return craftServer;
+    public void info(String info){
+        Bukkit.getLogger().info(prefix + info);
+    }
+
+    public void warning(String warning){
+        Bukkit.getLogger().warning(prefix + warning);
+    }
+
+    public void severe(String severe){
+        Bukkit.getLogger().severe(prefix + severe);
     }
 }

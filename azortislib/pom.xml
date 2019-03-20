@@ -38,7 +38,13 @@
             <version>1.13.2-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
-
+        <!-- Additional Library's -->
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>3.3.1</version>
+            <scope>compile</scope>
+        </dependency>
         <!-- For CraftBukkit Abstraction -->
         <dependency>
             <groupId>com.azortis</groupId>
@@ -55,5 +61,48 @@
             <type>jar</type>
         </dependency>
     </dependencies>
+
+    <build>
+        <finalName>AzortisLib</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.7.0</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <minimizeJar>false</minimizeJar>
+                    <outputDirectory>./target</outputDirectory>
+                    <relocations>
+                        <reloaction>
+                            <pattern>com.zaxxer</pattern>
+                            <shadedPattern>com.azortis.azortislib</shadedPattern>
+                        </reloaction>
+                    </relocations>
+                    <artifactSet>
+                        <excludes>
+                            <exclude>org.bstats.bukkit.MetricsLite</exclude>
+                        </excludes>
+                    </artifactSet>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

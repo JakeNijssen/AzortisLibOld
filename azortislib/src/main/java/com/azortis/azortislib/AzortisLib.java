@@ -26,6 +26,7 @@ public class AzortisLib {
 
     private Plugin plugin;
     private String pluginName;
+    private Logger logger;
 
     private MinecraftVersion minecraftVersion;
 
@@ -33,9 +34,10 @@ public class AzortisLib {
     private CraftManager craftManager;
     private CommandManager commandManager;
 
-    public AzortisLib(Plugin plugin, String pluginName){
+    public AzortisLib(Plugin plugin, String pluginName, String loggerPrefix){
         this.plugin = plugin;
         this.pluginName = pluginName;
+        this.logger = new Logger(loggerPrefix);
     }
 
     public MinecraftVersion getMinecraftVersion(){
@@ -51,6 +53,10 @@ public class AzortisLib {
             }
         }
         return minecraftVersion;
+    }
+
+    public Logger getLogger(){
+        return logger;
     }
 
     //Manager getters.
