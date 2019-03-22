@@ -17,12 +17,37 @@
 
 package com.azortis.azortislib.database;
 
+import com.azortis.azortislib.Callback;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
+
 import java.sql.Connection;
+import java.sql.SQLException;
 
-public interface IDatabase {
+public class MySQL implements IDatabase{
 
-    String getName();
+    private String name;
+    private HikariDataSource dataSource;
 
-    Connection getConnection();
-    
+    public MySQL(String name, HikariConfig config, Callback callback){
+        this.name = name;
+        dataSource = new HikariDataSource(config);
+        callback.onCallBack();
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public Connection getConnection() {
+        try{
+            return dataSource.getConnection();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }

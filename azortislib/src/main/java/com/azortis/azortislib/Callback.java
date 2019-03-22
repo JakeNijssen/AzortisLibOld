@@ -15,8 +15,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.azortis.azortislib.database;
+package com.azortis.azortislib;
 
-public enum DatabaseType {
-    MySQL, SQLite
+public interface Callback {
+
+    void onCallBack();
+
 }

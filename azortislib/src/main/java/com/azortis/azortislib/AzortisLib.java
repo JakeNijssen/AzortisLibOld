@@ -55,6 +55,8 @@ public class AzortisLib {
         return minecraftVersion;
     }
 
+    public Plugin getPlugin() { return plugin; }
+
     public Logger getLogger(){
         return logger;
     }

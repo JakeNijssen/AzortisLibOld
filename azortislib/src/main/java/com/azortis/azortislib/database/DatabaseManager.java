@@ -17,11 +17,43 @@
 
 package com.azortis.azortislib.database;
 
+import com.azortis.azortislib.AzortisLib;
+import com.azortis.azortislib.Callback;
+import com.zaxxer.hikari.HikariConfig;
+
 import java.util.HashMap;
 
 public class DatabaseManager {
+
+    private AzortisLib al;
     private HashMap<String, IDatabase> databases = new HashMap<>();
 
+    public DatabaseManager(AzortisLib al){
+        this.al = al;
+    }
 
+    public IDatabase getDatabase(String name){
+        return databases.get(name);
+    }
+
+    public IDatabase openMySQLDatabase(String name, HikariConfig config, Callback callback){
+        if(databases.containsKey(name)){
+            al.getLogger().warning("Database: " + name + " already exists!");
+            return null;
+        }
+        MySQL database = new MySQL(name, config, callback);
+        databases.put(name, database);
+        return database;
+    }
+
+    public IDatabase openSQLiteDatabase(String name, String filePath, Callback callback){
+        if(databases.containsKey(name)){
+            al.getLogger().warning("Database: " + name + " already exists!");
+            return null;
+        }
+        SQLite database = new SQLite(al, name, filePath, callback);
+        databases.put(name, database);
+        return database;
+    }
 
 }
