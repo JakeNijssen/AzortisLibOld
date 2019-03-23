@@ -41,7 +41,7 @@ public class DatabaseManager {
             al.getLogger().warning("Database: " + name + " already exists!");
             return null;
         }
-        MySQL database = new MySQL(name, config, callback);
+        MySQL database = new MySQL(al, name, config, callback);
         databases.put(name, database);
         return database;
     }

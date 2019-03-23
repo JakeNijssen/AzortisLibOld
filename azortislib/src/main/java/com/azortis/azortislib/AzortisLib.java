@@ -19,6 +19,7 @@ package com.azortis.azortislib;
 
 import com.azortis.azortislib.command.CommandManager;
 import com.azortis.azortislib.craftbukkit.CraftManager;
+import com.azortis.azortislib.database.DatabaseManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 
@@ -33,6 +34,7 @@ public class AzortisLib {
     //Managers
     private CraftManager craftManager;
     private CommandManager commandManager;
+    private DatabaseManager databaseManager;
 
     public AzortisLib(Plugin plugin, String pluginName, String loggerPrefix){
         this.plugin = plugin;
@@ -81,6 +83,12 @@ public class AzortisLib {
         return commandManager;
     }
 
-
+    public DatabaseManager getDatabaseManager(){
+        if(databaseManager == null){
+            databaseManager = new DatabaseManager(this);
+            return databaseManager;
+        }
+        return databaseManager;
+    }
 
 }

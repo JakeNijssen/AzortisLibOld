@@ -17,6 +17,7 @@
 
 package com.azortis.azortislib.database;
 
+import com.azortis.azortislib.AzortisLib;
 import com.azortis.azortislib.Callback;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -26,10 +27,12 @@ import java.sql.SQLException;
 
 public class MySQL implements IDatabase{
 
+    private AzortisLib al;
     private String name;
     private HikariDataSource dataSource;
 
-    public MySQL(String name, HikariConfig config, Callback callback){
+    public MySQL(AzortisLib al, String name, HikariConfig config, Callback callback){
+        this.al = al;
         this.name = name;
         dataSource = new HikariDataSource(config);
         callback.onCallBack();

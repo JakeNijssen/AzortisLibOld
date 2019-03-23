@@ -29,10 +29,12 @@ import java.sql.SQLException;
 @SuppressWarnings("all")
 public class SQLite implements IDatabase{
 
+    private AzortisLib al;
     private String name;
     private String path;
 
     public SQLite(AzortisLib al, String name, String filePath, Callback callback){
+        this.al = al;
         this.name = name;
         File databaseFile = new File(filePath, name + ".db");
         try{
