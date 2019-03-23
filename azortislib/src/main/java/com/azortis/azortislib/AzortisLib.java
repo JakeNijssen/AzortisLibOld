@@ -63,6 +63,12 @@ public class AzortisLib {
         return logger;
     }
 
+    public void close(){
+        if(databaseManager != null){
+            databaseManager.closeConnection();
+        }
+    }
+
     //Manager getters.
 
     public CraftManager getCraftManager(){

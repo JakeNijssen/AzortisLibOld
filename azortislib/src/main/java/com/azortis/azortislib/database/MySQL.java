@@ -18,7 +18,6 @@
 package com.azortis.azortislib.database;
 
 import com.azortis.azortislib.AzortisLib;
-import com.azortis.azortislib.Callback;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
@@ -26,21 +25,25 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class MySQL implements IDatabase{
-
-    private AzortisLib al;
-    private String name;
     private HikariDataSource dataSource;
 
-    public MySQL(AzortisLib al, String name, HikariConfig config, Callback callback){
-        this.al = al;
-        this.name = name;
-        dataSource = new HikariDataSource(config);
-        callback.onCallBack();
+    MySQL(AzortisLib al, MySQLSettings settings){
+        HikariConfig config = new HikariConfig();
+        config.setDataSourceClassName("org.mariadb.jdbc.MariaDbDataSource");
+        config.addDataSourceProperty("serverName", settings.getHost());
+        config.addDataSourceProperty("port", settings.getPort());
+        config.addDataSourceProperty("databaseName", settings.getDatabase());
+        config.setUsername(settings.getUsername());
+        config.setPassword(settings.getPassword());
+        config.addDataSourceProperty("cachePrepStmts", "true");
+        config.addDataSourceProperty("prepStmtCacheSize", "250");
+        config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
+        config.addDataSourceProperty("properties", "useUnicode=true;characterEncoding=utf8");
+        this.dataSource = new HikariDataSource(config);
     }
 
-    @Override
-    public String getName() {
-        return name;
+    void close(){
+        this.dataSource.close();
     }
 
     @Override

@@ -17,36 +17,39 @@
 
 package com.azortis.azortislib.database;
 
-import com.azortis.azortislib.AzortisLib;
+public class MySQLSettings {
+    private String host;
+    private String port;
+    private String database;
+    private String username;
+    private String password;
 
-public class DatabaseManager {
-    private AzortisLib al;
-    private IDatabase database;
-    private MySQL mySQL; //Stored, so it can be closed.
-
-    public DatabaseManager(AzortisLib al){
-        this.al = al;
+    public MySQLSettings(String host, String port, String database, String username, String password) {
+        this.host = host;
+        this.port = port;
+        this.database = database;
+        this.username = username;
+        this.password = password;
     }
 
-    public void useMySQL(MySQLSettings settings){
-        
+    public String getHost() {
+        return host;
     }
 
-    public void useSQLite(SQLiteSettings settings){
-
+    public String getPort() {
+        return port;
     }
 
-    public IDatabase getDatabase(){
+    public String getDatabase() {
         return database;
     }
 
-    /**
-     * This is only applicable if an MySQL database is used.
-     */
-    public void closeConnection(){
-        if(mySQL != null){
-            mySQL.close();
-        }
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
 }

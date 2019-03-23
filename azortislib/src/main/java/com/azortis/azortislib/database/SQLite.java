@@ -18,7 +18,7 @@
 package com.azortis.azortislib.database;
 
 import com.azortis.azortislib.AzortisLib;
-import com.azortis.azortislib.Callback;
+import org.bukkit.Bukkit;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,40 +28,30 @@ import java.sql.SQLException;
 
 @SuppressWarnings("all")
 public class SQLite implements IDatabase{
+    private String jdbcUrl;
 
-    private AzortisLib al;
-    private String name;
-    private String path;
-
-    public SQLite(AzortisLib al, String name, String filePath, Callback callback){
-        this.al = al;
-        this.name = name;
-        File databaseFile = new File(filePath, name + ".db");
+    SQLite(AzortisLib al, SQLiteSettings settings){
+        File dbFile = new File(settings.getFilePath(), settings.getFileName() + ".db");
         try{
-            if(!databaseFile.exists()){
-                if(!databaseFile.createNewFile()){
-                    al.getLogger().severe("Can't create database file: " + name + ".db");
-                }
+            if(!dbFile.exists()){
+                dbFile.createNewFile();
             }
-        }catch (NullPointerException | IOException e){
+        }catch (IOException e){
             e.printStackTrace();
+            al.getLogger().severe("Could not generate database file! Shutting down...");
+            Bukkit.getPluginManager().disablePlugin(al.getPlugin());
         }
-        path = "jdbc:sqlite:" + databaseFile.getPath();
-        callback.onCallBack();
-    }
-
-    @Override
-    public String getName() {
-        return name;
+        this.jdbcUrl = "jdbc:sqlite:" + dbFile.getPath();
     }
 
     @Override
     public Connection getConnection() {
         try{
-            return DriverManager.getConnection(path);
+            return DriverManager.getConnection(jdbcUrl);
         }catch (SQLException e){
             e.printStackTrace();
         }
         return null;
     }
+
 }
