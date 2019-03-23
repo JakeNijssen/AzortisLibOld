@@ -30,35 +30,42 @@ public class CommandBuilder {
     private List<String> aliases;
     private Plugin plugin;
 
-    public void setName(String name) {
+    public CommandBuilder setName(String name) {
         this.name = name;
+        return this;
     }
 
-    public void setDescription(String description) {
+    public CommandBuilder setDescription(String description) {
         this.description = description;
+        return this;
     }
 
-    public void setUsage(String usage) {
+    public CommandBuilder setUsage(String usage) {
         this.usage = usage;
+        return this;
     }
 
-    public void addAliases(List<String> aliases) {
+    public CommandBuilder addAliases(List<String> aliases) {
         if(this.aliases == null)this.aliases = new ArrayList<String>();
         this.aliases.addAll(aliases);
+        return this;
     }
 
-    public void addAliases(String... aliases){
+    public CommandBuilder addAliases(String... aliases){
         if(this.aliases == null)this.aliases = new ArrayList<String>();
         this.aliases.addAll(Arrays.asList(aliases));
+        return this;
     }
 
-    public void addAlias(String alias) {
+    public CommandBuilder addAlias(String alias) {
         if(aliases == null)aliases = new ArrayList<String>();
         this.aliases.add(alias);
+        return this;
     }
 
-    public void setPlugin(Plugin plugin) {
+    public CommandBuilder setPlugin(Plugin plugin){
         this.plugin = plugin;
+        return this;
     }
 
     public AlCommand build(){
