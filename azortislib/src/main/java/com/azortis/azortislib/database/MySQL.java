@@ -39,12 +39,11 @@ public class MySQL implements IDatabase{
         config.addDataSourceProperty("prepStmtCacheSize", "250");
         config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
         config.addDataSourceProperty("properties", "useUnicode=true;characterEncoding=utf8");
+
         this.dataSource = new HikariDataSource(config);
     }
 
-    void close(){
-        this.dataSource.close();
-    }
+
 
     @Override
     public Connection getConnection() {
@@ -54,6 +53,10 @@ public class MySQL implements IDatabase{
             e.printStackTrace();
         }
         return null;
+    }
+
+    void close(){
+        this.dataSource.close();
     }
 
 }

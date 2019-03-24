@@ -21,7 +21,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <artifactId>azortislib</artifactId>
-    <version>1.0</version>
+    <version>0.2-ALPHA</version>
 
     <parent>
         <artifactId>azortislib-parent</artifactId>

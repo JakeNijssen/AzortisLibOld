@@ -22,18 +22,28 @@ import com.azortis.azortislib.AzortisLib;
 public class DatabaseManager {
     private AzortisLib al;
     private IDatabase database;
-    private MySQL mySQL; //Stored, so it can be closed.
+    private MySQL mySQL; //Stored, so the dataSource can be closed correctly.
 
     public DatabaseManager(AzortisLib al){
         this.al = al;
     }
 
     public void useMySQL(MySQLSettings settings){
-        
+        if(database == null){
+            MySQL mySQL = new MySQL(al, settings);
+            this.mySQL = mySQL;
+            this.database = mySQL;
+            return;
+        }
+        al.getLogger().severe("Database already initialized!");
     }
 
     public void useSQLite(SQLiteSettings settings){
-
+        if(database == null){
+            this.database = new SQLite(al, settings);
+            return;
+        }
+        al.getLogger().severe("Database already initialized!");
     }
 
     public IDatabase getDatabase(){
