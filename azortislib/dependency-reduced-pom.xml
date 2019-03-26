@@ -24,7 +24,7 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>azortislib</artifactId>
-  <version>1.0</version>
+  <version>0.2</version>
   <build>
     <finalName>AzortisLib</finalName>
     <plugins>
@@ -60,11 +60,17 @@
               <shadedPattern>com.azortis.azortislib.slf4j</shadedPattern>
             </relocation>
           </relocations>
-          <artifactSet>
-            <excludes>
-              <exclude>org.bstats.bukkit.MetricsLite</exclude>
-            </excludes>
-          </artifactSet>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.sonatype.plugins</groupId>
+        <artifactId>nexus-staging-maven-plugin</artifactId>
+        <version>1.6.8</version>
+        <extensions>true</extensions>
+        <configuration>
+          <serverId>ossrh</serverId>
+          <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+          <autoReleaseAfterClose>false</autoReleaseAfterClose>
         </configuration>
       </plugin>
     </plugins>
@@ -103,4 +109,10 @@
       </exclusions>
     </dependency>
   </dependencies>
+  <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
 </project>

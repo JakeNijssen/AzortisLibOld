@@ -20,6 +20,7 @@ package com.azortis.azortislib;
 import com.azortis.azortislib.command.CommandManager;
 import com.azortis.azortislib.craftbukkit.CraftManager;
 import com.azortis.azortislib.database.DatabaseManager;
+import com.azortis.azortislib.file.FileManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 
@@ -35,6 +36,7 @@ public class AzortisLib {
     private CraftManager craftManager;
     private CommandManager commandManager;
     private DatabaseManager databaseManager;
+    private FileManager fileManager;
 
     public AzortisLib(Plugin plugin, String pluginName, String loggerPrefix){
         this.plugin = plugin;
@@ -51,7 +53,7 @@ public class AzortisLib {
             if(minecraftVersionString.equals("v1_13_R2")){
                 minecraftVersion = MinecraftVersion.v1_13_R2;
             }else if(minecraftVersionString.equals("v1_14_R1")){
-                //TODO add 1.14 support once it releases
+                minecraftVersion = MinecraftVersion.v1_14_R1;
             }
         }
         return minecraftVersion;
@@ -95,6 +97,14 @@ public class AzortisLib {
             return databaseManager;
         }
         return databaseManager;
+    }
+
+    public FileManager getFileManager(){
+        if(fileManager == null){
+            fileManager = new FileManager(this);
+            return fileManager;
+        }
+        return fileManager;
     }
 
 }

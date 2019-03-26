@@ -21,7 +21,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <artifactId>azortislib</artifactId>
-    <version>0.2-ALPHA</version>
+    <version>0.3-SNAPSHOT</version>
 
     <parent>
         <artifactId>azortislib-parent</artifactId>
@@ -29,6 +29,13 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 
     <dependencies>
         <!-- Spigot-API is always build on latest api version -->
@@ -106,11 +113,17 @@
                             <shadedPattern>com.azortis.azortislib.slf4j</shadedPattern>
                         </relocation>
                     </relocations>
-                    <artifactSet>
-                        <excludes>
-                            <exclude>org.bstats.bukkit.MetricsLite</exclude>
-                        </excludes>
-                    </artifactSet>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.8</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
                 </configuration>
             </plugin>
         </plugins>

@@ -15,20 +15,16 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.azortis.azortislib;
+package com.azortis.azortislib.file;
 
-public enum MinecraftVersion {
-    v1_13_R2("v1_13_R2"),
-    v1_14_R1("v1_14_R1");
+import com.azortis.azortislib.AzortisLib;
 
-    private final String versionString;
+public class FileManager {
+    private AzortisLib al;
 
-    MinecraftVersion(String versionString){
-        this.versionString = versionString;
+    public FileManager(AzortisLib al){
+        this.al = al;
     }
 
-    public String getVersionString(){
-        return versionString;
-    }
-
+    
 }
