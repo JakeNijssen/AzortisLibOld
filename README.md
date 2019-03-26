@@ -1,4 +1,4 @@
-# AzortisLib ![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/https/oss.sonatype.org/com.azortis/azortislib.svg?style=flat-square)
+# AzortisLib ![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/https/oss.sonatype.org/com.azortis/azortislib.svg?style=flat-square) ![Spiget Version](https://img.shields.io/spiget/version/64232.svg?label=spigot&style=flat-square)
 An extensive utility library for [Spigot](https://www.spigotmc.org/)
 
 ## Maven
