@@ -18,12 +18,14 @@ Add the following to your pom.xml
 #### Dependency
 
 ```xml
-<dependency>
-    <groupId>com.azortis</groupId>
-    <artifactId>azortislib</artifactId>
-    <version>@VERSION</version>
-    <scope>compile</scope>
-</dependency>
+<dependencies>
+    <dependency>
+        <groupId>com.azortis</groupId>
+        <artifactId>azortislib</artifactId>
+        <version>@VERSION</version>
+        <scope>compile</scope>
+    </dependency>
+</dependencies>
 ```
 
 **Please note that in order to use this library you must shade it into your resource. If you do not don't know how please refer to the [maven-shade-plugin](https://maven.apache.org/plugins/maven-shade-plugin/) page.**
