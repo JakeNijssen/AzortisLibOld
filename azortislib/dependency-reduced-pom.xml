@@ -24,7 +24,7 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>azortislib</artifactId>
-  <version>0.2</version>
+  <version>0.3-SNAPSHOT</version>
   <build>
     <finalName>AzortisLib</finalName>
     <plugins>
@@ -70,7 +70,7 @@
         <configuration>
           <serverId>ossrh</serverId>
           <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-          <autoReleaseAfterClose>false</autoReleaseAfterClose>
+          <autoReleaseAfterClose>true</autoReleaseAfterClose>
         </configuration>
       </plugin>
     </plugins>

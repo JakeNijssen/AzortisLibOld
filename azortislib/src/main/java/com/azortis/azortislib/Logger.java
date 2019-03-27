@@ -23,7 +23,7 @@ public class Logger {
     private String prefix;
 
     public Logger(String prefix){
-        this.prefix = prefix;
+        this.prefix = prefix + " ";
     }
 
     public void info(String info){

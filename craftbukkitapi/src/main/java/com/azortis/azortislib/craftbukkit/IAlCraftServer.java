@@ -15,15 +15,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.azortis.azortislib.craftbukkit.v1_13_R2;
+package com.azortis.azortislib.craftbukkit;
 
-import com.azortis.azortislib.craftbukkit.ICraftServer;
-import org.bukkit.Bukkit;
 import org.bukkit.command.CommandMap;
 
-public class CraftServer implements ICraftServer {
+public interface IAlCraftServer {
 
-    public CommandMap getCommandMap() {
-        return ((CraftServer) Bukkit.getServer()).getCommandMap();
-    }
+    CommandMap getCommandMap();
+
 }
