@@ -31,4 +31,4 @@ Add the following to your pom.xml
 </dependencies>
 ```
 
-**Please note that in order to use this library you must shade it into your resource. If you do not don't know how please refer to the [maven-shade-plugin](https://maven.apache.org/plugins/maven-shade-plugin/) page. Also make sure you relocate this resource you can find more about relocations [here](https://maven.apache.org/plugins/maven-shade-plugin/examples/class-relocation.html).**
+**Please note that in order to use this library you must shade it into your resource. If you do not don't know how please refer to the [maven-shade-plugin](https://maven.apache.org/plugins/maven-shade-plugin/) page. Also make sure you relocate this resource, you can find more about relocations [here](https://maven.apache.org/plugins/maven-shade-plugin/examples/class-relocation.html).**
