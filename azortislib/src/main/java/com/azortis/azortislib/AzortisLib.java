@@ -52,8 +52,10 @@ public class AzortisLib {
             minecraftVersionString = rawMinecraftVersionString.substring(0, rawMinecraftVersionString.length() - ".AlAlCraftServer".length());
             if(minecraftVersionString.equals("v1_13_R2")){
                 minecraftVersion = MinecraftVersion.v1_13_R2;
+                return minecraftVersion;
             }else if(minecraftVersionString.equals("v1_14_R1")){
                 minecraftVersion = MinecraftVersion.v1_14_R1;
+                return minecraftVersion;
             }
         }
         return minecraftVersion;
@@ -66,8 +68,8 @@ public class AzortisLib {
     }
 
     public void close(){
-        if(databaseManager != null){
-            databaseManager.closeConnection();
+        if(this.databaseManager != null){
+            this.databaseManager.closeConnection();
         }
     }
 
@@ -75,16 +77,14 @@ public class AzortisLib {
 
     public CraftManager getCraftManager(){
         if(craftManager == null){
-            craftManager = new CraftManager(getMinecraftVersion().getVersionString());
+            this.craftManager = new CraftManager(getMinecraftVersion().getVersionString());
         }
-        return craftManager;
+        return this.craftManager;
     }
 
     public CommandManager getCommandManager(){
         if(commandManager == null){
-            if(craftManager == null){
-                craftManager = new CraftManager(getMinecraftVersion().getVersionString()); // Required to fetch commandMap
-            }
+            getCraftManager(); // To make sure it isn't empty
             commandManager = new CommandManager(this);
             return commandManager;
         }
