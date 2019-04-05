@@ -22,7 +22,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandMap;
 import org.bukkit.craftbukkit.v1_13_R2.CraftServer;
 
-public class AlAlCraftServer implements IAlCraftServer {
+public class AlCraftServer implements IAlCraftServer {
 
     public CommandMap getCommandMap() {
         return ((CraftServer) Bukkit.getServer()).getCommandMap();

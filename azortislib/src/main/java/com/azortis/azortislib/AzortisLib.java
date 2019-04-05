@@ -49,7 +49,7 @@ public class AzortisLib {
             String rawMinecraftVersionString = Bukkit.getServer().getClass().getName();
             String minecraftVersionString;
             rawMinecraftVersionString = rawMinecraftVersionString.substring("org.bukkit.craftbukkit.".length());
-            minecraftVersionString = rawMinecraftVersionString.substring(0, rawMinecraftVersionString.length() - ".AlAlCraftServer".length());
+            minecraftVersionString = rawMinecraftVersionString.substring(0, rawMinecraftVersionString.length() - ".AlCraftServer".length());
             if(minecraftVersionString.equals("v1_13_R2")){
                 minecraftVersion = MinecraftVersion.v1_13_R2;
                 return minecraftVersion;
@@ -77,7 +77,8 @@ public class AzortisLib {
 
     public CraftManager getCraftManager(){
         if(craftManager == null){
-            this.craftManager = new CraftManager(getMinecraftVersion().getVersionString());
+            MinecraftVersion minecraftVersion = getMinecraftVersion();
+            this.craftManager = new CraftManager(minecraftVersion.getVersionString());
         }
         return this.craftManager;
     }
