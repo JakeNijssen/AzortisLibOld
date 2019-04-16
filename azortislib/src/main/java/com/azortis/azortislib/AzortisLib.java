@@ -46,10 +46,7 @@ public class AzortisLib {
 
     public MinecraftVersion getMinecraftVersion(){
         if(minecraftVersion == null){
-            String rawMinecraftVersionString = Bukkit.getServer().getClass().getName();
-            String minecraftVersionString;
-            rawMinecraftVersionString = rawMinecraftVersionString.substring("org.bukkit.craftbukkit.".length());
-            minecraftVersionString = rawMinecraftVersionString.substring(0, rawMinecraftVersionString.length() - ".AlCraftServer".length());
+            String minecraftVersionString = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
             if(minecraftVersionString.equals("v1_13_R2")){
                 minecraftVersion = MinecraftVersion.v1_13_R2;
                 return minecraftVersion;
