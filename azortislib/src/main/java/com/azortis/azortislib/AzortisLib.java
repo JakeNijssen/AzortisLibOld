@@ -36,12 +36,13 @@ public class AzortisLib {
     private CraftManager craftManager;
     private CommandManager commandManager;
     private DatabaseManager databaseManager;
-    private FileManager fileManager;
 
     public AzortisLib(Plugin plugin, String pluginName, String loggerPrefix){
         this.plugin = plugin;
         this.pluginName = pluginName;
         this.logger = new Logger(loggerPrefix);
+
+        FileManager.initialize(this);
     }
 
     public MinecraftVersion getMinecraftVersion(){
@@ -95,14 +96,6 @@ public class AzortisLib {
             return databaseManager;
         }
         return databaseManager;
-    }
-
-    public FileManager getFileManager(){
-        if(fileManager == null){
-            fileManager = new FileManager(this);
-            return fileManager;
-        }
-        return fileManager;
     }
 
 }

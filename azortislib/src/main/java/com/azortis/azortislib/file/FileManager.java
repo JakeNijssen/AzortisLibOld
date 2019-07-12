@@ -18,14 +18,29 @@
 package com.azortis.azortislib.file;
 
 import com.azortis.azortislib.AzortisLib;
+import org.bukkit.configuration.file.YamlConfiguration;
+
+import java.io.File;
 
 public class FileManager {
-    private AzortisLib al;
+    private static AzortisLib al;
 
-    public FileManager(AzortisLib al){
-        this.al = al;
+    private FileManager() {
     }
 
+    private File getFile(String s) {
+        return new File(al.getPlugin().getDataFolder(), s + ".yml");
+    }
 
+    public static YamlConfiguration getConfig(String s) {
+        YamlConfiguration config = YamlConfiguration.loadConfiguration(new FileManager().getFile(s));
+        config.options().copyDefaults(true);
+        return config;
+    }
+
+     public static FileManager initialize(AzortisLib alvar) {
+        al = alvar;
+        return new FileManager();
+    }
 
 }
