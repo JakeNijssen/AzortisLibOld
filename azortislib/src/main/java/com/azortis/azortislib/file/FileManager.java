@@ -28,12 +28,12 @@ public class FileManager {
     private FileManager() {
     }
 
-    private File getFile(String s) {
+    private static File getFile(String s) {
         return new File(al.getPlugin().getDataFolder(), s + ".yml");
     }
 
     public static YamlConfiguration getConfig(String s) {
-        YamlConfiguration config = YamlConfiguration.loadConfiguration(new FileManager().getFile(s));
+        YamlConfiguration config = YamlConfiguration.loadConfiguration(getFile(s));
         config.options().copyDefaults(true);
         return config;
     }
