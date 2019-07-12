@@ -20,9 +20,9 @@ package com.azortis.azortislib.inventory;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
 public interface ButtonClick {
-    /*
+    /**
      * The method called when a button is clicked.
-     * @param InventoryClickEvent
+     * @param event
      */
-    void buttonClick(InventoryClickEvent e);
+    void buttonClick(InventoryClickEvent event);
 }

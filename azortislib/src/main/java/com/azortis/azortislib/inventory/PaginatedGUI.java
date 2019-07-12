@@ -17,22 +17,19 @@
 
 package com.azortis.azortislib.inventory;
 
-import org.bukkit.ChatColor;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class PaginatedGUI implements InventoryHolder, Comparable, GUI {
+public class PaginatedGUI implements InventoryHolder, Comparable {
     private Inventory inv;
-    private String name;
     private Number page;
     private Map<Integer, Button> buttonMap = new HashMap<>();
 
     public void setInventory(Inventory i) {
         inv = i;
-        name = ChatColor.stripColor(i.getName());
     }
 
     public Button getButton(int slot) {
@@ -40,6 +37,7 @@ public class PaginatedGUI implements InventoryHolder, Comparable, GUI {
     }
 
     public void addButton(int slot, Button b) {
+        inv.addItem(b);
         buttonMap.put(slot, b);
     }
 
@@ -58,13 +56,11 @@ public class PaginatedGUI implements InventoryHolder, Comparable, GUI {
 
     @Override
     public int compareTo(Object o) {
-        if(o instanceof PaginatedGUI) {
-            return ((PaginatedGUI) o).getPage().doubleValue() >= page.doubleValue() ? 1: -1;
+        if (o instanceof PaginatedGUI && page != null) {
+            return Double.compare(((PaginatedGUI) o).getPage().doubleValue(), page.doubleValue());
         }
         return -1;
     }
 
-    public String getName() {
-        return name;
-    }
+
 }

@@ -29,17 +29,17 @@ public class Button extends ItemStack {
     }
 
 
-    /*
+    /**
      * Sets the code that is run when clicked in the inventory by using the ButtonClick interface
-     * @param ButtonClick
+     * @param click
      */
-    public void setClick(ButtonClick c) {
-        this.clickEvent = c;
+    public void setClick(ButtonClick click) {
+        this.clickEvent = click;
     }
 
-    /*
+    /**
      * Called when the button is clicked
-     * @param InventoryClickEvent
+     * @param event
      */
     public void click(InventoryClickEvent event) {
         clickEvent.buttonClick(event);
