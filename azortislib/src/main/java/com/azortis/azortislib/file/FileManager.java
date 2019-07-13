@@ -21,6 +21,7 @@ import com.azortis.azortislib.AzortisLib;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
+import java.io.IOException;
 
 public class FileManager {
     private static AzortisLib al;
@@ -29,7 +30,16 @@ public class FileManager {
     }
 
     private static File getFile(String s) {
-        return new File(al.getPlugin().getDataFolder(), s + ".yml");
+        if(!al.getPlugin().getDataFolder().exists()) al.getPlugin().getDataFolder().mkdirs();
+        File f = new File(al.getPlugin().getDataFolder(), s + ".yml");
+        if (!f.exists()) {
+            try {
+                f.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return f;
     }
 
     public static YamlConfiguration getConfig(String s) {
@@ -38,7 +48,9 @@ public class FileManager {
         return config;
     }
 
-     public static FileManager initialize(AzortisLib alvar) {
+
+
+    public static FileManager initialize(AzortisLib alvar) {
         al = alvar;
         return new FileManager();
     }
