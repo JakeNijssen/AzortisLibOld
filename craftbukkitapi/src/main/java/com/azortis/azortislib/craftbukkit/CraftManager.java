@@ -37,7 +37,7 @@ public class CraftManager {
         return craftServer;
     }
 
-    public IAlCraftPlayer getCraftPlayer() {
+    public IAlCraftPlayer getPlayer() {
         return craftPlayer;
     }
 }

@@ -27,6 +27,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>azortislib-v1_14_R1</artifactId>
+    <version>v1_14_R1</version>
 
     <dependencies>
         <dependency>

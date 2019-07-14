@@ -74,6 +74,13 @@
             <scope>compile</scope>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>com.azortis</groupId>
+            <artifactId>azortislib-v1_14_R1</artifactId>
+            <version>v1_14_R1</version>
+            <scope>compile</scope>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 
     <build>
