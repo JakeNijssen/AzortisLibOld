@@ -18,10 +18,14 @@
 package com.azortis.azortislib.file;
 
 import com.azortis.azortislib.AzortisLib;
+import com.google.gson.JsonObject;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class FileManager {
     private static AzortisLib al;
@@ -44,11 +48,25 @@ public class FileManager {
 
     public static YamlConfiguration getConfig(String s) {
         YamlConfiguration config = YamlConfiguration.loadConfiguration(getFile(s));
-        config.options().copyDefaults(true);
         return config;
     }
 
 
+    /**
+     *
+     * @param src
+     * InputStream. Recommended to get stream via getResourceAsStream(...) method.
+     * @param destination
+     * The absolute path of the new file. "C:/Users/Admin/Desktop/Server/plugins/resource.png"
+     */
+    public static void copyResource(InputStream src, String destination) {
+        try {
+            Files.copy(src, Paths.get(destination));
+        } catch (IOException ex) {
+            al.getLogger().warning("Could not copy resource: ");
+            ex.printStackTrace();
+        }
+    }
 
     public static FileManager initialize(AzortisLib alvar) {
         al = alvar;
