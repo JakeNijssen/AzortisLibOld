@@ -20,11 +20,13 @@ package com.azortis.azortislib.craftbukkit;
 public class CraftManager {
 
     private IAlCraftServer craftServer;
+    private IAlCraftPlayer craftPlayer;
 
     public CraftManager(String minecraftVersion){
         try{
             String packageName = "com.azortis.azortislib.craftbukkit." + minecraftVersion + ".";
             craftServer = (IAlCraftServer) Class.forName(packageName + "AlCraftServer").getConstructor().newInstance();
+            craftPlayer = (IAlCraftPlayer) Class.forName(packageName + "AlCraftPlayer").getConstructor().newInstance();
         }catch (Exception exception){ //Since there are so many exception that can be thrown we use Exception and not specifics.
             //TODO log error trough logger
             exception.printStackTrace();
@@ -33,5 +35,9 @@ public class CraftManager {
 
     public IAlCraftServer getServer(){
         return craftServer;
+    }
+
+    public IAlCraftPlayer getPlayer() {
+        return craftPlayer;
     }
 }
