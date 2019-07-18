@@ -20,32 +20,11 @@ package com.azortis.azortislib.file;
 import com.azortis.azortislib.AzortisLib;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
 
-public class FileManager {
+public class JSONConfig {
 
-    private AzortisLib al;
+    public JSONConfig(File file){
 
-    public FileManager(AzortisLib al) {
-        this.al = al;
-        if (!al.getPlugin().getDataFolder().exists()) al.getPlugin().getDataFolder().mkdir();
-    }
-
-    private void copyFile(InputStream inputStream, File file){
-        try {
-            OutputStream out = new FileOutputStream(file);
-            byte[] buf = new byte[1024];
-            int len;
-            while((len=inputStream.read(buf))>0){
-                out.write(buf,0,len);
-            }
-            out.close();
-            inputStream.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
 }

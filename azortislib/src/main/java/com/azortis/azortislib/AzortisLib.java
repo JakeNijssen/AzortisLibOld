@@ -42,7 +42,6 @@ public class AzortisLib {
         this.pluginName = pluginName;
         this.logger = new Logger(loggerPrefix);
 
-        FileManager.initialize(this);
     }
 
     public MinecraftVersion getMinecraftVersion(){
