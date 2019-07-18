@@ -46,6 +46,13 @@
             <scope>provided</scope>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>net.md-5</groupId>
+            <artifactId>bungeecord-api</artifactId>
+            <version>1.14-SNAPSHOT</version>
+            <type>jar</type>
+            <scope>provided</scope>
+        </dependency>
         <!-- Additional Library's -->
         <dependency>
             <groupId>com.zaxxer</groupId>
