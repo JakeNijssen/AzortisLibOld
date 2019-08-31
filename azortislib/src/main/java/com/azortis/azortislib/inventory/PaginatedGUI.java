@@ -23,7 +23,7 @@ import org.bukkit.inventory.InventoryHolder;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PaginatedGUI implements InventoryHolder, Comparable {
+public class PaginatedGUI implements InventoryHolder, Comparable, Cloneable {
     private Inventory inv;
     private Number page;
     private Map<Integer, Button> buttonMap = new HashMap<>();
@@ -62,5 +62,14 @@ public class PaginatedGUI implements InventoryHolder, Comparable {
         return -1;
     }
 
-
+    @Override
+    public PaginatedGUI clone() throws CloneNotSupportedException {
+        PaginatedGUI gui = (PaginatedGUI) super.clone();
+        gui.setInventory(inv);
+        gui.setPage(page);
+        for(int i : buttonMap.keySet()) {
+            gui.addButton(i, buttonMap.get(i).clone());
+        }
+        return gui;
+    }
 }

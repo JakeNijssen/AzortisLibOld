@@ -21,7 +21,7 @@ import org.bukkit.Material;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class Button extends ItemStack {
+public class Button extends ItemStack implements Cloneable {
     private ButtonClick clickEvent;
 
     public Button(Material type) {
@@ -31,7 +31,7 @@ public class Button extends ItemStack {
 
     /**
      * Sets the code that is run when clicked in the inventory by using the ButtonClick interface
-     * @param click
+     * @param click the ButtonClick to be used in the button.
      */
     public void setClick(ButtonClick click) {
         this.clickEvent = click;
@@ -39,10 +39,17 @@ public class Button extends ItemStack {
 
     /**
      * Called when the button is clicked
-     * @param event
+     * @param event The inventory event fired when the button is clicked.
      */
     public void click(InventoryClickEvent event) {
         clickEvent.buttonClick(event);
     }
 
+
+    @Override
+    public Button clone() {
+       Button b = (Button) super.clone();
+       b.clickEvent = clickEvent;
+       return b;
+    }
 }
