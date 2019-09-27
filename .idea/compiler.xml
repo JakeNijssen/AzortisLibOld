@@ -6,14 +6,14 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="craftbukkitapi" />
         <module name="v1_13_R2" />
-        <module name="AzortisLib" />
+        <module name="azortislib" />
+        <module name="craftbukkitapi" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="api" target="1.5" />
-      <module name="azortislib" target="1.8" />
+      <module name="AzortisLib" target="1.8" />
       <module name="azortislib-craftbukkitapi" target="1.6" />
       <module name="azortislib-v1_13_R2" target="1.6" />
       <module name="azortislib-v1_14_R1" target="1.6" />
